@@ -1,0 +1,5 @@
+build=Build pntfr-0.0.1.gem into the pkg directory.
+default=Run tests
+install=Build and install pntfr-0.0.1.gem into system gems.
+release=Create tag v0.0.1 and build and push pntfr-0.0.1.gem to Rubygems
+test=Run tests
