@@ -8,6 +8,7 @@ module Pntfr
       def initialize session
         super
         @notification_key= Pntfr.config.gcm[:notification_key]
+        @gcm= GCM.new(@notification_key) unless Pntfr.test_env?
       end
 
       def msg content
@@ -22,8 +23,7 @@ module Pntfr
         if Pntfr.test_env?
           Pntfr.add_delivery(@push_id, options)
         else
-          gcm= GCM.new(@notification_key)
-          gcm.send_notification(@push_id, options)
+          @gcm.send_notification(@push_id, options)
         end
       end
 

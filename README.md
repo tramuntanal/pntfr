@@ -47,10 +47,13 @@ The neutral model for the content of the messages is composed by a title and a d
 this maps directly to Android notification's `data` content wile is concatenated with a newline
 for Apns notificaitons.
 
-Sending a notification is quite simple. First you create a virtual session to manage 
-each recipient's connection. This virtual session will take care of the message format for
-each platform and of connecting with the correct driver. Secondly set the message to be sent,
-and notify.
+Sending a notification is quite simple.
+- First, create a virtual session to manage each recipient's connection. This virtual
+session is platform specific and will take care of the message structure for the
+given platform and of connecting through the correct driver.
+- Second, set the message to be sent
+- Third, notify.
+Your're done.
 
 Given you have a DeviceSession model in your application. Then to send a message to a device do:
 ```ruby

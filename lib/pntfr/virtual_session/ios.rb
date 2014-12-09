@@ -5,6 +5,7 @@ module Pntfr
   module VirtualSession
     class Ios < Pntfr::VirtualSession::Base
       def msg content
+        reset_msg
         @alert= content[:title]
         @alert+= "\n#{content[:description]}"
         @sound= content[:sound]
@@ -28,8 +29,16 @@ module Pntfr
         else
           APNS.send_notification(@push_id, n)
         end
-
       end
+
+      #-------------------------------------------------
+      private
+      #-------------------------------------------------
+
+      def reset_msg
+        @alert= @sound= @badge= nil
+      end
+
     end
   end
 end
