@@ -1,13 +1,13 @@
-= Pntfr
+# Pntfr
 Push Notifier is a simple adapter for APNS (Apple Push Notification Service) and GCM (Google Cloud Messaging) gems, that way you can use same API to send push notifications to both devices.
 
-= Usage
-== Installation
+# Usage
+## Installation
 Add it to your Gemfile:
 
 gem 'pntfr', '~>0.1.1'
 
-== Configuration
+## Configuration
 To configure the Apple Push Notification Service just set the Hash of keys to be used:
 ```ruby
 Pntfr.configure do |config|
@@ -38,7 +38,7 @@ Pntfr.configure do |config|
 end
 ```
 
-== Sending messages
+## Sending messages
 Pntfr suposes you have session objects with the `platform` and `push_id` attributes.
 Also, and optionally, a `num_notifs` integer attribute will be automagically managed to 
 monitor Apple's badge in notifications.
