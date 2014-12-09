@@ -56,6 +56,7 @@ Given you have a DeviceSession model in your application. Then to send a message
 ```ruby
 # get device session
 session= DeviceSession.new(platform: Pntfr::Platforms::IOS, push_id: '...')
+# send notification to the given user
 Pntfr::Notifier.to(session).msg({:title => 'Some Title', :description => 'A description'}).notify
 ```
 
