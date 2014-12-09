@@ -25,7 +25,7 @@ Pntfr.configure do |config|
   config.gcm= {:notification_key => 'SomeSecretKeySomeSecretKeySomeSecretKey'}
 end
 ```
-You will normally configure both in the same initializer:
+You will normally configure both at the same time:
 ```ruby
 Pntfr.configure do |config|
   config.apns= {
