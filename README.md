@@ -55,12 +55,17 @@ given platform and of connecting through the correct driver.
 - Third, notify.
 Your're done.
 
-Given you have a DeviceSession model in your application. Then to send a message to a device do:
+Given you have a DeviceSession model in your application. Then to send notifications to a device do:
 ```ruby
 # get device session
 session= DeviceSession.new(platform: Pntfr::Platforms::IOS, push_id: '...')
-# send notification to the given user
+# send notification to the given device
 Pntfr::Notifier.to(session).msg({:title => 'Some Title', :description => 'A description'}).notify
+
+#send many notifications to a given device
+vsession= Pntfr::Notifier.to(session)
+vsession.msg({:title => 'Some Title', :description => 'A description'}).notify
+vsession.msg({:title => 'Some Other Title', :description => 'Another description', :sound => 'flipping-sound.aiff'}).notify
 ```
 
 # Resources
