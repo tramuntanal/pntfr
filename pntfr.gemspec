@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Pntfr::VERSION
   spec.authors       = ['oliver']
   spec.email         = ['oliver.hv@coditramuntana.com']
-  spec.summary       = %q{Push notifier is an adapter for APNS and GCM gems, that way you can use same api to send push notifications to both devices.}
+  spec.summary       = %q{Push notifier is a simple adapter for APNS and GCM gems, that way you can use same api to send push notifications to both devices.}
   #  spec.description   = %q{TODO: Write a longer description. Optional.}
   spec.homepage      = "http://www.coditramuntana.com"
   spec.license       = "MIT"
