@@ -1,10 +1,12 @@
 #
 # VirtualSession implementation for iOS
 #
+require 'apns'
 module Pntfr
   module VirtualSession
     class Ios < Pntfr::VirtualSession::Base
       def msg content
+        configure_apns
         reset_msg
         @alert= content[:title]
         @alert+= "\n#{content[:description]}"
@@ -27,14 +29,22 @@ module Pntfr
         if Pntfr.test_env?
           Pntfr.add_delivery(@push_id, n)
         else
-          APNS.send_notification(@push_id, n)
+          ::APNS.send_notification(@push_id, n)
         end
+        SuccessResponse.new
       end
 
       #-------------------------------------------------
       private
       #-------------------------------------------------
 
+      def configure_apns
+        config= Pntfr.config.apns
+        APNS.host = config[:host]
+        APNS.pem  = config[:pem]
+        APNS.port = config[:port]
+        APNS.pass = config[:pass]
+      end
       def reset_msg
         @alert= @sound= @badge= nil
       end

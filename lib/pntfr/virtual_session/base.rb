@@ -11,5 +11,7 @@ module Pntfr
     end
   end
 end
-require File.dirname(__FILE__) + '/android'
-require File.dirname(__FILE__) + '/ios'
+require 'pntfr/virtual_session/success_response'
+require 'pntfr/virtual_session/android'
+require 'pntfr/virtual_session/gcm_response'
+require 'pntfr/virtual_session/ios'
