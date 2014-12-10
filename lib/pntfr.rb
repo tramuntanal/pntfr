@@ -28,3 +28,5 @@ end
 
 # produce empty configuration
 Pntfr.configure {}
+
+require 'pntfr/test_ext'

@@ -1,7 +1,8 @@
 require 'minitest/autorun'
-require 'pntfr'
 
 ENV['ENV']= 'test'
+
+require 'pntfr'
 
 # require all test files
 def add_to_path(d)
@@ -17,19 +18,3 @@ def add_to_path(d)
 end
 add_to_path(File.dirname(__FILE__))
 
-#
-# Extend library to enable testing.
-#
-module Pntfr
-  @@deliveries= {}
-  def self.deliveries
-    @@deliveries
-  end
-  def self.add_delivery push_id, n
-    if @@deliveries.has_key?(push_id)
-      @@deliveries[push_id] << n
-    else
-      @@deliveries[push_id]= [n]
-    end
-  end
-end
