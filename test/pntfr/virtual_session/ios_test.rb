@@ -2,6 +2,7 @@ require 'pntfr/device_session'
 module Pntfr
   module VirtualSession
     class IosTest < Minitest::Test
+
       def test_received_content_shoud_be_ready_to_be_sent_to_apns
         push_id= 'IOSiosIOSiosIOSiosIOSiosIOSiosIOSiosIOSiosIOSiosIOSiosIOSios'
         session= DeviceSession.new(Pntfr::Platforms::IOS, push_id)

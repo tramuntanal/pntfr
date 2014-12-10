@@ -8,9 +8,10 @@ module Pntfr
   module VirtualSession
     class GcmResponse < BaseResponse
       def initialize json
-        @status_code= json[:status_code]
-        @response= json[:response]
-        @body= json[:body]
+        @raw= json
+        @status_code= @raw[:status_code]
+        @response= @raw[:response]
+        @body= @raw[:body]
         if success?
           @parsed_body= JSON.parse(@body)
           @body_result= @parsed_body['results'].first
@@ -38,6 +39,9 @@ module Pntfr
       end
       def failure
         "#{@body}->#{@response}"
+      end
+      def to_s
+        @raw.to_s
       end
     end
   end

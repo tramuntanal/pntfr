@@ -1,10 +1,6 @@
 require 'pntfr/device_session'
 module Pntfr
   class NotifierTest < Minitest::Test
-    def initialize method_name
-      super
-      Pntfr.configure {}
-    end
 
     def test_android_sessions_should_instantiate_android_virtual_sessions
       session= DeviceSession.new(Pntfr::Platforms::ANDROID)

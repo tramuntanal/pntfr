@@ -25,3 +25,6 @@ module Pntfr
     end
   end
 end
+
+# produce empty configuration
+Pntfr.configure {}

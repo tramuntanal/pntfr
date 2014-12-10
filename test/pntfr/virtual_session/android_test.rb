@@ -2,10 +2,6 @@ require 'pntfr/device_session'
 module Pntfr
   module VirtualSession
     class AndroidTest < Minitest::Test
-      def initialize method_name
-        super
-        Pntfr.configure {}
-      end
 
       def test_received_content_shoud_be_sent_to_gcm
         push_id= 'ANDROIDANDROIDANDROIDANDROIDANDROIDANDROIDANDROIDANDROIDANDROID'
