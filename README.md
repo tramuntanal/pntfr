@@ -67,6 +67,12 @@ vsession= Pntfr::Notifier.to(session)
 vsession.msg({:title => 'Some Title', :description => 'A description'}).notify
 vsession.msg({:title => 'Some Other Title', :description => 'Another description', :sound => 'flipping-sound.aiff'}).notify
 ```
+# Testing
+For testing one can check the messages to be sent to each given driver the same way
+that Rails ActiveMailer works: messages are stacked into `Pntfr.deliveries[push_id]`,
+where for each key (push_id is the identifier of the device) one will get an ordered array 
+with all messages sent to the device while testing. Of course, while testing,
+notifications are not sent, only stored in the stack.
 
 # Resources
 - Depends on APNS gem: https://rubygems.org/gems/apns
