@@ -7,7 +7,7 @@ require 'pntfr'
 # require all test files
 def add_to_path(d)
   Dir.entries(d).each do |f|
-    next if f == '.' or f == '..'
+    next if f == '.' || f == '..'
     file= File.join(d, f)
     if File.directory?(file)
       add_to_path(file)
@@ -17,4 +17,3 @@ def add_to_path(d)
   end
 end
 add_to_path(File.dirname(__FILE__))
-
