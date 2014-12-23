@@ -13,12 +13,13 @@ module Pntfr
         @gcm= ::GCM.new(@notification_key) unless Pntfr.test_env?
       end
 
-      def msg content
+      def msg content, custom=nil
         @data= {
           :title        => content[:title],
           :description  => content[:description],
         }
         @data[:sound]= parse_sound_file(content[:sound]) unless content[:sound].nil?
+        @data[:custom]= custom if custom
         self
       end
       def notify

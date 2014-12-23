@@ -65,7 +65,26 @@ Pntfr::Notifier.to(session).msg({:title => 'Some Title', :description => 'A desc
 #send many notifications to a given device
 vsession= Pntfr::Notifier.to(session)
 vsession.msg({:title => 'Some Title', :description => 'A description'}).notify
-vsession.msg({:title => 'Some Other Title', :description => 'Another description', :sound => 'flipping-sound.aiff'}).notify
+vsession.msg({
+  :title => 'Some Other Title',
+  :description => 'Another description',
+  :sound => 'flipping-sound.aiff'})
+vsession.notify
+
+# send notifications with custom content (an extra optional parameter to #msg)
+vsession= Pntfr::Notifier.to(session)
+vsession.msg(
+  {:title => 'Some Title', :description => 'A description'},
+  {
+    :extra1 => 'extra one',
+    :extra_2 => 'extra 2',
+    :'last-extra' => {lastkey: 'last value'}
+  }
+)
+vsession.notify
+
+# Custom content will be found into :custom key for Android.
+# For iOS each custom key is transformed into an 'acme-' prefixed key.
 ```
 # Testing
 For testing one can check the messages to be sent to each given driver the same way
