@@ -74,7 +74,7 @@ vsession.notify
 # send notifications with custom content (an extra optional parameter to #msg)
 vsession= Pntfr::Notifier.to(session)
 vsession.msg(
-  {:title => 'Some Title', :description => 'A description'},
+  {:title => 'Short Title'},
   {
     :extra1 => 'extra one',
     :extra_2 => 'extra 2',
