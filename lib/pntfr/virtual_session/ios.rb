@@ -51,10 +51,10 @@ module Pntfr
         @alert= @sound= @badge= nil
       end
       def add_custom_content custom
-        @custom= {}
+        @custom= {other: {}}
         custom.each_pair { |k, v|
           key= "acme-#{k}".to_sym
-          @custom[key]= v
+          @custom[:other][key]= v
         }
       end
     end

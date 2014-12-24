@@ -54,9 +54,10 @@ module Pntfr
         refute_nil ios_notifs, "A notification should have been delivered for #{@push_id}"
         ios_notif= ios_notifs.last
         assert_equal 'Test Title', ios_notif[:alert]
-        assert_equal 'extra one', ios_notif[:'acme-extra1']
-        assert_equal 'extra 2', ios_notif[:'acme-extra_2']
-        assert_equal({lastkey: 'last value'}, ios_notif[:'acme-last-extra'])
+        other= ios_notif[:other]
+        assert_equal 'extra one', other[:'acme-extra1']
+        assert_equal 'extra 2', other[:'acme-extra_2']
+        assert_equal({lastkey: 'last value'}, other[:'acme-last-extra'])
       end
     end
   end
