@@ -42,7 +42,7 @@ module Pntfr
         assert_equal 5, notif[:badge]
       end
 
-      def test_sending_custom_content_for_ios_should_be_added_as_acme_keys
+      def test_sending_custom_content_for_ios_should_be_added_as_custom_keys
         session= DeviceSession.new(Pntfr::Platforms::IOS, @push_id)
 
         vsession= Pntfr::Notifier.to(session)
@@ -54,10 +54,10 @@ module Pntfr
         refute_nil ios_notifs, "A notification should have been delivered for #{@push_id}"
         ios_notif= ios_notifs.last
         assert_equal 'Test Title', ios_notif[:alert]
-        other= ios_notif[:other]
-        assert_equal 'extra one', other[:'acme-extra1']
-        assert_equal 'extra 2', other[:'acme-extra_2']
-        assert_equal({lastkey: 'last value'}, other[:'acme-last-extra'])
+        custom= ios_notif[:other][:custom]
+        assert_equal 'extra one', custom[:'extra1']
+        assert_equal 'extra 2', custom[:'extra_2']
+        assert_equal({lastkey: 'last value'}, custom[:'last-extra'])
       end
     end
   end

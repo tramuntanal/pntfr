@@ -83,8 +83,7 @@ vsession.msg(
 )
 vsession.notify
 
-# Custom content will be found into :custom key for Android.
-# For iOS each custom key is transformed into an 'acme-' prefixed key.
+# Custom content will be found into :custom key for each platform.
 ```
 # Testing
 For testing one can check the messages to be sent to each given driver the same way
