@@ -5,7 +5,7 @@ Push Notifier is a simple adapter for APNS (Apple Push Notification Service) and
 ## Installation
 Add it to your Gemfile:
 
-gem 'pntfr', '~>0.1.1'
+gem 'pntfr', '~>0.2.0'
 
 ## Configuration
 To configure the Apple Push Notification Service just set the Hash of keys to be used:
