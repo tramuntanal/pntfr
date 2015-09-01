@@ -2,10 +2,10 @@
 # Always success.
 # To be used on cases where no response to be parsed is received.
 #
-require 'pntfr/virtual_session/base_response'
+require 'pntfr/session/base_response'
 
 module Pntfr
-  module VirtualSession
+  module Session
     class SuccessResponse < BaseResponse
       # communication with notification service was OK?
       # implies no +failure?+

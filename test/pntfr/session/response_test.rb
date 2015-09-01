@@ -4,7 +4,7 @@ module Pntfr
     # Success response
     #
     def test_success_response_should_have_sent_msg_and_no_error
-      rs= VirtualSession::SuccessResponse.new
+      rs= Session::SuccessResponse.new
       assert rs.success? and rs.msg_sent?
       refute rs.error?
       refute rs.failure?
@@ -19,20 +19,20 @@ module Pntfr
     GCM_400_RESPONSE= {:body=>"\"registration_ids\" field is not a JSON array\n", :headers=>{"content-type"=>["text/plain; charset=UTF-8"], "date"=>["Tue, 09 Dec 2014 21:27:30 GMT"], "expires"=>["Tue, 09 Dec 2014 21:27:30 GMT"], "cache-control"=>["private, max-age=0"], "x-content-type-options"=>["nosniff"], "x-frame-options"=>["SAMEORIGIN"], "x-xss-protection"=>["1; mode=block"], "server"=>["GSE"], "alternate-protocol"=>["443:quic,p=0.02"], "connection"=>["close"]}, :status_code=>400, :response=>"Only applies for JSON requests. Indicates that the request could not be parsed as JSON, or it contained invalid fields."}
 
     def test_gcm_200_responses_with_success_should_have_success_and_no_error
-      rs= VirtualSession::GcmResponse.new(GCM_200_WITH_SUCCESS)
+      rs= Session::GcmResponse.new(GCM_200_WITH_SUCCESS)
       assert rs.success?
       refute rs.error?
       assert_nil rs.error
     end
     def test_gcm_200_responses_with_invalid_registration_should_have_failed_and_report_error
-      rs= VirtualSession::GcmResponse.new(GCM_200_WITH_INVALID_REGISTRATION)
+      rs= Session::GcmResponse.new(GCM_200_WITH_INVALID_REGISTRATION)
       refute rs.failure?
       refute rs.msg_sent?
       assert rs.success? and rs.error?
       assert_equal 'InvalidRegistration', rs.error
     end
     def test_gcm_200_responses_with_mismatch_sender_id_should_have_failed_and_report_error
-      rs= VirtualSession::GcmResponse.new(GCM_200_WITH_MISMATCH_SENDER_ID)
+      rs= Session::GcmResponse.new(GCM_200_WITH_MISMATCH_SENDER_ID)
       assert rs.success?
       refute rs.msg_sent?
       assert rs.error?
@@ -40,7 +40,7 @@ module Pntfr
       assert_equal 'MismatchSenderId', rs.error
     end
     def test_gcm_400_responses_should_have_failed_and_report_error
-      rs= VirtualSession::GcmResponse.new(GCM_400_RESPONSE)
+      rs= Session::GcmResponse.new(GCM_400_RESPONSE)
       refute rs.success? and rs.error?
       assert rs.failure?
       expected= "\"registration_ids\" field is not a JSON array\n->Only applies for JSON requests. Indicates that the request could not be parsed as JSON, or it contained invalid fields."
@@ -51,7 +51,7 @@ module Pntfr
         GCM_200_WITH_INVALID_REGISTRATION,
         GCM_200_WITH_MISMATCH_SENDER_ID,
         GCM_400_RESPONSE].each do |json|
-        assert_equal json.to_s, VirtualSession::GcmResponse.new(json).to_s
+        assert_equal json.to_s, Session::GcmResponse.new(json).to_s
       end
     end
   end

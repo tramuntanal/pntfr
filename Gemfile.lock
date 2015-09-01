@@ -1,0 +1,31 @@
+PATH
+  remote: .
+  specs:
+    pntfr (0.2.0)
+      apns (~> 1.0, >= 1.0.0)
+      gcm (~> 0.0, >= 0.0.9)
+      json (~> 1.8, >= 1.8.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    apns (1.0.0)
+    gcm (0.1.0)
+      httparty
+      json
+    httparty (0.13.4)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    json (1.8.2)
+    minitest (5.7.0)
+    multi_xml (0.5.5)
+    rake (10.4.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.6)
+  minitest (~> 5.7.0)
+  pntfr!
+  rake

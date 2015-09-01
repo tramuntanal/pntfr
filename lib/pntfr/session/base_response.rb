@@ -1,5 +1,5 @@
 module Pntfr
-  module VirtualSession
+  module Session
     class BaseResponse
       # communication with notification service was OK?
       # implies no +failure?+

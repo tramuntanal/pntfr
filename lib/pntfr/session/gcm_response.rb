@@ -1,11 +1,11 @@
 #
 # Google Cloud Messaging json response wrapper.
 #
-require 'pntfr/virtual_session/base_response'
+require 'pntfr/session/base_response'
 require 'json'
 
 module Pntfr
-  module VirtualSession
+  module Session
     class GcmResponse < BaseResponse
       def initialize json
         @raw= json
