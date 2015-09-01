@@ -1,13 +1,18 @@
 # Pntfr
-Push Notifier is a simple adapter for APNS (Apple Push Notification Service) and GCM (Google Cloud Messaging) gems, that way you can use same API to send push notifications to both devices.
+Push Notifier is a simple adapter for APNS (Apple Push Notification Service) and GCM (Google Cloud Messaging) gems, that way you can use one message format and one library to send push notifications to both devices.
 
 # Usage
 ## Installation
 Add it to your Gemfile:
 
-gem 'pntfr', '~>0.2.0'
+gem 'pntfr', '~>0.3.0'
 
 ## Configuration
+Pntfr can be configured in two ways.
+- Setting a global configuration
+- Setting notification service's configuration on each call.
+
+### Global configuration
 To configure the Apple Push Notification Service just set the Hash of keys to be used:
 ```ruby
 Pntfr.configure do |config|
@@ -39,41 +44,55 @@ end
 ```
 
 ## Sending messages
-Pntfr suposes you have session objects with the `platform` and `push_id` attributes.
+Pntfr suposes you have device objects, or other kind of model, with `platform` and `push_id` attributes.
 Also, and optionally, a `num_notifs` integer attribute will be automagically managed to 
 monitor Apple's badge in notifications.
 
-The neutral model for the content of the messages is composed by a title and a description,
-this maps directly to Android notification's `data` content wile is concatenated with a newline
-for Apns notificaitons.
+In order to avoid having to create a different message for each platform Pntfr
+expects a "neutral format" for the messges. The neutral format of the messages
+is a map composed by `title` and `description` keys.
+This keys are added directly to Android notification's `data` content, on the
+other side, for Apns notifications, are concatenated with a newline
 
 Sending a notification is quite simple.
-- First, create a virtual session to manage each recipient's connection. This virtual
-session is platform specific and will take care of the message structure for the
-given platform and of connecting through the correct driver.
+- First, create a notifier to manage each recipient's connection. This notifier
+manages platform specific sessions and will take care of the message structure
+for each platform and of connecting through the correct driver.
 - Second, set the message to be sent
 - Third, notify.
 Your're done.
 
-Given you have a DeviceSession model in your application. Then to send notifications to a device do:
+Given you have a Device model in your application. Then to send notifications to a device do:
 ```ruby
-# get device session
-session= DeviceSession.new(platform: Pntfr::Platforms::IOS, push_id: '...')
+# SEND ONE NOTIFICATION TO A SINGLE DEVICE
+# get the device to be notified
+device= Device.new(platform: Pntfr::Platforms::IOS, push_id: '...')
 # send notification to the given device
-Pntfr::Notifier.to(session).msg({:title => 'Some Title', :description => 'A description'}).notify
+Pntfr::Notifier.to(device).msg({:title => 'Some Title', :description => 'A description'}).notify
 
-#send many notifications to a given device
-vsession= Pntfr::Notifier.to(session)
-vsession.msg({:title => 'Some Title', :description => 'A description'}).notify
-vsession.msg({
+# SEND ONE NOTIFICATION TO MANY DEVICES
+# using ActiveRecord for example
+notifier= Pntfr::Notifier.new
+notifier.notify({
   :title => 'Some Other Title',
   :description => 'Another description',
   :sound => 'flipping-sound.aiff'})
-vsession.notify
+Device.find_in_batches do |devices|
+  notifier.update_devices(devices)
+  notifier.notify
+end
 
-# send notifications with custom content (an extra optional parameter to #msg)
-vsession= Pntfr::Notifier.to(session)
-vsession.msg(
+# SEND MANY NOTIFICATIONS TO A GIVEN DEVICE
+notifier= Pntfr::Notifier.to(device)
+notifier.msg({:title => 'Title1', :description => 'Description 1'}).notify
+notifier.msg({:title => 'Title2', :description => 'Description 2'}).notify
+notifier.msg({:title => 'Title3', :description => 'Description 3'}).notify
+...
+
+# NOTIFICATIONS WITH CUSTOM CONTENT
+# send notifications with custom content (extra and optional parameter to #msg)
+notifier= Pntfr::Notifier.to(device)
+notifier.msg(
   {:title => 'Short Title'},
   {
     :extra1 => 'extra one',
@@ -81,16 +100,35 @@ vsession.msg(
     :'last-extra' => {lastkey: 'last value'}
   }
 )
-vsession.notify
+notifier.notify
 
-# Custom content will be found into :custom key for each platform.
+
+# Supose you have this configuration for 
+# SETTING ANPS AND GCN CREDENTIALS ON EACH NOTIFICATION
+# using different configuration on each call
+credentials= {ios: {
+        host: 'test-host',
+        pem: 'test-pem',
+        port: 'test-port',
+        pass: 'test-password',
+      },
+andr: 'notification key'
+}
+notifier= Pntfr::Notifier.new( credentials )
+# this Notifier instance overrides the global credentials configuration (if any)
+notifier.update_devices(device).msg({:title => 'Title', :description => 'Description'}).notify
+# of course the device's push_id and credentials should belong to the same application.
 ```
 # Testing
-For testing one can check the messages to be sent to each given driver the same way
+For testing, one can check the messages sent to each device the same way
 that Rails ActiveMailer works: messages are stacked into `Pntfr.deliveries[push_id]`,
 where for each key (push_id is the identifier of the device) one will get an ordered array 
 with all messages sent to the device while testing. Of course, while testing,
 notifications are not sent, only stored in the stack.
+
+# Further development (roadmap)
+- Update cannonical push id when required for gcm.
+- Retrieve feedback on sent messages for apns.
 
 # Resources
 - Depends on APNS gem: https://rubygems.org/gems/apns
@@ -99,6 +137,6 @@ notifications are not sent, only stored in the stack.
 
 # Authors
 
-- Oliver HV <https://github.com/tramuntanal>
+- Oliver Valls <https://github.com/tramuntanal>
 
 Contributions are always welcome and greatly appreciated!
