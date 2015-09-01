@@ -49,7 +49,7 @@ Also, and optionally, a `num_notifs` integer attribute will be automagically man
 monitor Apple's badge in notifications.
 
 In order to avoid having to create a different message for each platform Pntfr
-expects a "neutral format" for the messges. The neutral format of the messages
+expects a "neutral format" for the messages. The neutral format of the messages
 is a map composed by `title` and `description` keys.
 This keys are added directly to Android notification's `data` content, on the
 other side, for Apns notifications, are concatenated with a newline
@@ -60,7 +60,7 @@ manages platform specific sessions and will take care of the message structure
 for each platform and of connecting through the correct driver.
 - Second, set the message to be sent
 - Third, notify.
-Your're done.
+You're done.
 
 Given you have a Device model in your application. Then to send notifications to a device do:
 ```ruby
