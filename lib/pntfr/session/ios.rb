@@ -9,11 +9,7 @@ module Pntfr
       attr_reader :apns
 
       def initialize apns_config=nil
-        if apns_config.nil?
-          configure_apns(Pntfr.config.apns)
-        else
-          configure_apns(apns_config)
-        end
+        configure_apns(apns_config)
       end
 
       def notify devices, notification
@@ -46,7 +42,11 @@ module Pntfr
         device.methods.include?(:num_notifs)
       end
 
-      def configure_apns config
+      def configure_apns config_override
+        config= Pntfr.config.apns
+        unless config_override.nil?
+          config= config.clone.merge(config_override)
+        end
         APNS.host = config[:host]
         APNS.pem  = config[:pem]
         APNS.port = config[:port]

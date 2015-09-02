@@ -1,6 +1,12 @@
 require 'pntfr/device'
 module Pntfr
   class IosTest < Minitest::Test
+    TEST_GENERAL_IOS_CONFIG= {
+      host: 'test-general_host',
+      pem: 'test-general_pem',
+      port: 'test-general_port',
+      pass: 'test-general_password',
+    }
     def setup
       @push_id= 'IOSiosIOSiosIOSiosIOSiosIOSiosIOSiosIOSiosIOSiosIOSiosIOSios'
     end
@@ -61,7 +67,22 @@ module Pntfr
       assert_equal({lastkey: 'last value'}, custom[:'last-extra'])
     end
 
-    def test_when_overriding_ios_credentials_should_use_new_ones
+    def test_when_not_overriding_ios_credentials_should_use_general_config_credentials
+      Pntfr.configure do |config|
+        config.apns= TEST_GENERAL_IOS_CONFIG
+      end
+      ios_session= Pntfr::Session::Ios.new
+      apns= ios_session.apns
+      assert_equal TEST_GENERAL_IOS_CONFIG[:host], apns.host
+      assert_equal TEST_GENERAL_IOS_CONFIG[:pem], apns.pem
+      assert_equal TEST_GENERAL_IOS_CONFIG[:port], apns.port
+      assert_equal TEST_GENERAL_IOS_CONFIG[:pass], apns.pass
+    end
+
+    def test_when_overriding_all_ios_credentials_should_use_new_ones
+      Pntfr.configure do |config|
+        config.apns= TEST_GENERAL_IOS_CONFIG
+      end
       apns_config= {
         host: 'test-host',
         pem: 'test-pem',
@@ -74,6 +95,22 @@ module Pntfr
       assert_equal 'test-pem', apns.pem
       assert_equal 'test-port', apns.port
       assert_equal 'test-password', apns.pass
+    end
+
+    def test_when_overriding_some_ios_credentials_should_use_new_ones_but_keep_others
+      Pntfr.configure do |config|
+        config.apns= TEST_GENERAL_IOS_CONFIG
+      end
+      apns_config= {
+        pem: 'some-test-pem',
+        pass: 'some-test-password',
+      }
+      ios_session= Pntfr::Session::Ios.new(apns_config)
+      apns= ios_session.apns
+      assert_equal TEST_GENERAL_IOS_CONFIG[:host], apns.host
+      assert_equal 'some-test-pem', apns.pem
+      assert_equal TEST_GENERAL_IOS_CONFIG[:port], apns.port
+      assert_equal 'some-test-password', apns.pass
     end
 
     #-----------------------------------------------------------

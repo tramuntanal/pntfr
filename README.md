@@ -5,7 +5,7 @@ Push Notifier is a simple adapter for APNS (Apple Push Notification Service) and
 ## Installation
 Add it to your Gemfile:
 
-gem 'pntfr', '~>0.3.0'
+gem 'pntfr', '0.3.0-RC.2'
 
 ## Configuration
 Pntfr can be configured in two ways.
@@ -103,16 +103,16 @@ notifier.msg(
 notifier.notify
 
 
-# Supose you have this configuration for 
 # SETTING ANPS AND GCN CREDENTIALS ON EACH NOTIFICATION
 # using different configuration on each call
-credentials= {ios: {
-        host: 'test-host',
+credentials= {
+  # for ios you select what you override, in this case host and port will be
+  # kept from the general configuration
+  ios: {
         pem: 'test-pem',
-        port: 'test-port',
         pass: 'test-password',
       },
-andr: 'notification key'
+  andr: 'notification key'
 }
 notifier= Pntfr::Notifier.new( credentials )
 # this Notifier instance overrides the global credentials configuration (if any)
