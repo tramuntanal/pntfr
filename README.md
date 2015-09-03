@@ -5,7 +5,7 @@ Push Notifier is a simple adapter for APNS (Apple Push Notification Service) and
 ## Installation
 Add it to your Gemfile:
 
-gem 'pntfr', '0.3.0-RC.2'
+gem 'pntfr', '0.4.0'
 
 ## Configuration
 Pntfr can be configured in two ways.
