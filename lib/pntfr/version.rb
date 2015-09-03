@@ -1,6 +1,6 @@
 module Pntfr
   #
-  # PATCH v0.3.1
+  # MINOR v0.4.0
   # - [FEATURE] When overriding ios credentials, merge over general configuration.
   #
   # MINOR v0.3.0
@@ -9,5 +9,5 @@ module Pntfr
   # - Allow overriding general configuration credentials when instantiating each
   # Notifier (on both platforms).
   # - Internal refactoring.
-  VERSION = '0.3.1'
+  VERSION = '0.4.0'
 end
