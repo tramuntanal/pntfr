@@ -1,5 +1,8 @@
 module Pntfr
   #
+  # PATCH v0.4.1
+  # - Republish gem after gem yanking it.
+  #
   # MINOR v0.4.0
   # - [FEATURE] When overriding ios credentials, merge over general configuration.
   #
@@ -9,5 +12,5 @@ module Pntfr
   # - Allow overriding general configuration credentials when instantiating each
   # Notifier (on both platforms).
   # - Internal refactoring.
-  VERSION = '0.4.0'
+  VERSION = '0.4.1'
 end
