@@ -19,8 +19,8 @@ module Pntfr
             if !notification[:badge].nil?
               device.num_notifs= notification[:badge]
             else
-              if device.methods.include?(:increment)
-                device.increment(:num_notifs)
+              if device.methods.include?(:increment!)
+                device.increment!(:num_notifs)
               else
                 device.num_notifs+= 1
               end

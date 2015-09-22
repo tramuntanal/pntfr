@@ -3,6 +3,10 @@
 #
 module Pntfr
   #
+  # PATCH v0.5.1
+  # - Use increment! instead of increment when incrementing badge on a device object
+  # that quacks like ActiveRecord.
+  #
   # MINOR v0.5.0
   # - Badge control now can use ActiveRecord's increment method.
   #
@@ -18,5 +22,5 @@ module Pntfr
   # - Allow overriding general configuration credentials when instantiating each
   # Notifier (on both platforms).
   # - Internal refactoring.
-  VERSION = '0.5.0'
+  VERSION = '0.5.1'
 end
