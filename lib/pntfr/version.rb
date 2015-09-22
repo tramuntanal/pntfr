@@ -1,3 +1,6 @@
+#
+# Let's follow Semantic Versioning: http://semver.org/
+#
 module Pntfr
   #
   # PATCH v0.4.1
