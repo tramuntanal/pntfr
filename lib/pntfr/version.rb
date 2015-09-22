@@ -3,6 +3,9 @@
 #
 module Pntfr
   #
+  # MINOR v0.5.0
+  # - Badge control now can use ActiveRecord's increment method.
+  #
   # PATCH v0.4.1
   # - Republish gem after gem yanking it.
   #
@@ -15,5 +18,5 @@ module Pntfr
   # - Allow overriding general configuration credentials when instantiating each
   # Notifier (on both platforms).
   # - Internal refactoring.
-  VERSION = '0.4.1'
+  VERSION = '0.5.0'
 end

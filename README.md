@@ -46,7 +46,9 @@ end
 ## Sending messages
 Pntfr suposes you have device objects, or other kind of model, with `platform` and `push_id` attributes.
 Also, and optionally, a `num_notifs` integer attribute will be automagically managed to 
-monitor Apple's badge in notifications.
+monitor Apple's badge in notifications (for device objects with an `increment` method
+(like ActiveRecord;) will use `increment(:num_notifs)`, for non ActiveRecord like
+device objects `num_notifs+= 1` will be used).
 
 In order to avoid having to create a different message for each platform Pntfr
 expects a "neutral format" for the messages. The neutral format of the messages
