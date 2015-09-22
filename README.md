@@ -101,7 +101,18 @@ notifier.msg(
   }
 )
 notifier.notify
-
+# for IOS will result in the adding the custom content in the msg this way:
+msg[:other][:custom]= {
+    :extra1 => 'extra one',
+    :extra_2 => 'extra 2',
+    :'last-extra' => {lastkey: 'last value'}
+  }
+# for ANDROID will result in the adding the custom content in the msg this way:
+msg[:custom]= {
+    :extra1 => 'extra one',
+    :extra_2 => 'extra 2',
+    :'last-extra' => {lastkey: 'last value'}
+  }
 
 # SETTING ANPS AND GCN CREDENTIALS ON EACH NOTIFICATION
 # using different configuration on each call
