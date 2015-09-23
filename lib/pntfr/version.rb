@@ -3,6 +3,9 @@
 #
 module Pntfr
   #
+  # PATCH v0.5.2
+  # - Fix. [FIX] Increase badge independently for each device.
+  #
   # PATCH v0.5.1
   # - Use increment! instead of increment when incrementing badge on a device object
   # that quacks like ActiveRecord.
@@ -22,5 +25,5 @@ module Pntfr
   # - Allow overriding general configuration credentials when instantiating each
   # Notifier (on both platforms).
   # - Internal refactoring.
-  VERSION = '0.5.1'
+  VERSION = '0.5.2'
 end
