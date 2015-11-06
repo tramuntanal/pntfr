@@ -3,6 +3,9 @@
 #
 module Pntfr
   #
+  # PATCH v0.5.3
+  # - [FIX] Depend on apns2 gem to be connection failure tolerant during big batches.
+  #
   # PATCH v0.5.2
   # - Fix. [FIX] Increase badge independently for each device.
   #
@@ -25,5 +28,5 @@ module Pntfr
   # - Allow overriding general configuration credentials when instantiating each
   # Notifier (on both platforms).
   # - Internal refactoring.
-  VERSION = '0.5.2'
+  VERSION = '0.5.3'
 end
