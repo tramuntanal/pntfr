@@ -1,6 +1,7 @@
 require 'pntfr/version'
 require 'pntfr/platforms'
 require 'pntfr/notifier'
+require 'pntfr/feedback'
 
 module Pntfr
   def self.test_env?

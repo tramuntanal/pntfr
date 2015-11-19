@@ -132,6 +132,30 @@ notifier= Pntfr::Notifier.new( credentials )
 notifier.update_devices(device).msg({:title => 'Title', :description => 'Description'}).notify
 # of course the device's push_id and credentials should belong to the same application.
 ```
+## Apns Feedback
+This is specific of the Apple Push Notification Service.
+To clean the database from bad devices that will slow down batch notification sendings,
+one must check which devices caused error on the past and remove them from the database.
+
+The process is easy, simply ask the Apns service for the list of bad devices,
+and then do the cleaning.
+
+```ruby
+feedback= Pntfr::Feedback.new
+bad_devices= feedback.bad_devices
+
+# do the cleaning of your database, for example
+bad_devices.each do |bad_device|
+  d= Device.find_by_platform_and_push_id(Pntfr::Platforms.IOS, bad_device.push_id)
+  d.destroy
+end
+```
+
++bad_devices+ is an Array of Pntfr::BadDevice objects with the two attributes returned
+by the apns feedback service: timestamp and push_id.
+
+It is recommended to do a feedback cleaning once a day.
+
 # Testing
 For testing, one can check the messages sent to each device the same way
 that Rails ActiveMailer works: messages are stacked into `Pntfr.deliveries[push_id]`,
@@ -141,7 +165,6 @@ notifications are not sent, only stored in the stack.
 
 # Further development (roadmap)
 - Update cannonical push id when required for gcm.
-- Retrieve feedback on sent messages for apns.
 
 # Resources
 - Depends on APNS gem: https://rubygems.org/gems/apns

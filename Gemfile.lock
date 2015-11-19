@@ -1,23 +1,23 @@
 PATH
   remote: .
   specs:
-    pntfr (0.2.0)
-      apns (~> 1.0, >= 1.0.0)
+    pntfr (0.5.3)
+      apns2 (~> 0.0, >= 0.0.1)
       gcm (~> 0.0, >= 0.0.9)
       json (~> 1.8, >= 1.8.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    apns (1.0.0)
+    apns2 (0.0.1)
     gcm (0.1.0)
       httparty
       json
-    httparty (0.13.4)
+    httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-    json (1.8.2)
-    minitest (5.7.0)
+    json (1.8.3)
+    minitest (5.8.3)
     multi_xml (0.5.5)
     rake (10.4.2)
 
@@ -26,6 +26,6 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.6)
-  minitest (~> 5.7.0)
+  minitest (~> 5.8, >= 5.8.3)
   pntfr!
   rake

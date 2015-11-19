@@ -2,9 +2,12 @@
 # Session implementation for iOS
 #
 require 'apns'
+require 'pntfr/apns_configurator'
+
 module Pntfr
   module Session
     class Ios < Pntfr::Session::Base
+      include Pntfr::ApnsConfigurator
 
       attr_reader :apns
 
@@ -47,17 +50,6 @@ module Pntfr
         device.methods.include?(:num_notifs)
       end
 
-      def configure_apns config_override
-        config= Pntfr.config.apns
-        unless config_override.nil?
-          config= config.clone.merge(config_override)
-        end
-        APNS.host = config[:host]
-        APNS.pem  = config[:pem]
-        APNS.port = config[:port]
-        APNS.pass = config[:pass]
-        @apns= APNS
-      end
     end
   end
 end

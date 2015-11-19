@@ -1,9 +1,10 @@
+require File.dirname(__FILE__) + '/base_service'
 require File.dirname(__FILE__) + '/session/base'
 require File.dirname(__FILE__) + '/notification'
 
 module Pntfr
 
-  class Notifier
+  class Notifier < BaseService
     def self.to devices, credentials=nil
       notif= Notifier.new(credentials)
       notif.update_devices(devices)
@@ -25,8 +26,7 @@ module Pntfr
     #  }
     #
     def initialize credentials=nil
-      validate_credentials(credentials)
-      @credentials= credentials || {}
+      super
 
       @andr_responses=[]
       @ios_responses= []
@@ -78,15 +78,6 @@ module Pntfr
     end
     def ios_session
       @ios_session||= Pntfr::Session::Ios.new(@credentials[:ios])
-    end
-    def validate_credentials(credentials)
-      return if credentials.nil?
-      if !credentials.is_a?(Hash)
-        raise ArgumentError.new('Credentials should be a Hash with either :andr or :ios keys!')
-      end
-      if !(credentials.has_key?(:andr) or credentials.has_key?(:ios))
-        raise ArgumentError.new('Either :andr or :ios service credentials should have been provided!')
-      end
     end
 
   end

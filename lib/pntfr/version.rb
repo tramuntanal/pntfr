@@ -3,6 +3,9 @@
 #
 module Pntfr
   #
+  # PATCH v0.6.0
+  # - [FEATURE] Retrieve feedback on bad devices for apns.
+  #
   # PATCH v0.5.3
   # - [FIX] Depend on apns2 gem to be connection failure tolerant during big batches.
   #
@@ -28,5 +31,5 @@ module Pntfr
   # - Allow overriding general configuration credentials when instantiating each
   # Notifier (on both platforms).
   # - Internal refactoring.
-  VERSION = '0.5.3'
+  VERSION = '0.6.0'
 end
