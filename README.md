@@ -116,7 +116,7 @@ msg[:custom]= {
     :'last-extra' => {lastkey: 'last value'}
   }
 
-# SETTING ANPS AND GCN CREDENTIALS ON EACH NOTIFICATION
+# SETTING ANPS AND GCM CREDENTIALS ON EACH NOTIFICATION
 # using different configuration on each call
 credentials= {
   # for ios you select what you override, in this case host and port will be
