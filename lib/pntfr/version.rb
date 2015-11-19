@@ -5,6 +5,7 @@ module Pntfr
   #
   # PATCH v0.6.0
   # - [FEATURE] Retrieve feedback on bad devices for apns.
+  # - Depend on minitest for development.
   #
   # PATCH v0.5.3
   # - [FIX] Depend on apns2 gem to be connection failure tolerant during big batches.
