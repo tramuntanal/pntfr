@@ -3,7 +3,11 @@
 #
 module Pntfr
   #
-  # PATCH v0.6.0
+  # PATCH v0.6.1
+  # - [FIX] Correct Pntfr::Feedbak initialization when credentials are not from arguments.
+  # - Depend upon apns2 0.0.2 which removes a useless call to puts.
+  #
+  # MINOR v0.6.0
   # - [FEATURE] Retrieve feedback on bad devices for apns.
   # - Depend on minitest for development.
   #
@@ -32,5 +36,5 @@ module Pntfr
   # - Allow overriding general configuration credentials when instantiating each
   # Notifier (on both platforms).
   # - Internal refactoring.
-  VERSION = '0.6.0'
+  VERSION = '0.6.1'
 end

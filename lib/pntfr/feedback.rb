@@ -8,7 +8,7 @@ module Pntfr
 
     def initialize credentials=nil
       super
-      configure_apns(credentials[:ios])
+      configure_apns(@credentials[:ios])
     end
 
     def bad_devices
