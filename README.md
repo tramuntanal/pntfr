@@ -44,7 +44,7 @@ end
 ```
 
 ## Sending messages
-Pntfr suposes you have device objects, or other kind of model, with `platform` and `push_id` attributes.
+Pntfr suposes you have Device objects, or other kind of model, with `platform` and `push_id` attributes.
 Also, and optionally, a `num_notifs` integer attribute will be automagically managed to 
 monitor Apple's badge in notifications (for device objects with an `increment!` method
 (like ActiveRecord;) will use `increment!(:num_notifs)`, for non ActiveRecord like
@@ -57,11 +57,13 @@ This keys are added directly to Android notification's `data` content, on the
 other side, for Apns notifications, are concatenated with a newline
 
 Sending a notification is quite simple.
-- First, create a notifier to manage each recipient's connection. This notifier
+
+1. Create a notifier to manage each recipient's connection. This notifier
 manages platform specific sessions and will take care of the message structure
 for each platform and of connecting through the correct driver.
-- Second, set the message to be sent
-- Third, notify.
+1. Set the message to be sent
+1. Notify.
+
 You're done.
 
 Given you have a Device model in your application. Then to send notifications to a device do:
@@ -151,7 +153,7 @@ bad_devices.each do |bad_device|
 end
 ```
 
-+bad_devices+ is an Array of Pntfr::BadDevice objects with the two attributes returned
+`bad_devices` is an Array of Pntfr::BadDevice objects with the two attributes returned
 by the apns feedback service: timestamp and push_id.
 
 It is recommended to do a feedback cleaning once a day.
